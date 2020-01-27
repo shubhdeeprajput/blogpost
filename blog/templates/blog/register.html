@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Create free account</title>
+</head>
+
+<style>
+    .msg {
+        font-size: 12px;
+        color: red;
+        font-style: italic;
+    }
+
+    .card {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        max-width: 45rem;
+        box-shadow: 5px 5px 22px 2px grey;
+    }
+
+    .btm {
+        margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+        margin-top: 1rem;
+    }
+    #para{
+        text-align: center;
+        font-size: 15px;
+        margin-top: 2rem;
+        font-family: serif;
+    }
+    .dv{
+        margin-top: 5rem;
+    }    
+body{
+    background-color: lightgrey;
+}
+.container{
+    background-color: whitesmoke;
+}
+
+</style>
+
+<body>
+    {% load static %}
+    <div class="container col-md-6 mt-5 card">
+        <div class="card-body">
+            <div class="card-title">
+                <img src="#" alt="logo">
+                <h3>Create your free account</h3>
+            </div>
+            <div class="row">
+            <div class='col-md-7'>
+                <form action="register" method="POST">{% csrf_token %}
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleFormControlInput1">First Name:</label>
+                            <input type="text" name="first_name" class="form-control" id="exampleFormControlInput1"
+                                placeholder="First Name" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleFormControlInput2">Last Name:</label>
+                            <input type="text" name="last_name" class="form-control" id="exampleFormControlInput2"
+                                placeholder="Last Name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput3">UserName:</label>
+                        <input type="text" name="username" class="form-control" id="exampleFormControlInput3"
+                            placeholder="Username" required>
+                        <div class='msg'>
+                            {% for message in messages %}
+                            {{message}}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput4">Email:</label>
+                        <input type="email" name="email" class="form-control" id="exampleFormControlInput4"
+                            placeholder="Email" required>
+                        <div class='msg'>
+                            {% for message in messages %}
+                            {{message}}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleFormControlInput5">Password:</label>
+                            <input type="password" name="password1" class="form-control" id="exampleFormControlInput5"
+                                placeholder="Password" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleFormControlInput6">Confirm password:</label>
+                            <input type="password" name="password2" class="form-control" id="exampleFormControlInput6"
+                                placeholder="Confirm Password" required>
+                            <div class='msg'>
+                                {% for message in messages %}
+                                {{message}}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row btm">
+                        <div class="col-md-6"><button type="submit" class="btn btn-primary">Sign up</button></div>
+                        <div class="col-md-6"><a href="/" style=font-size:12px;>Already have account? Sign
+                                in</a></div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-5 dv">
+           <div><img src='{% static "blog/img.png" %}' style="width:230px"></div>
+           <div id="para" style="line-height: 0px;"><p>What's inside you?</p>
+           <p>Show everyone by Signing up with us.</p></div>
+        </div>
+        </div>
+        
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>

@@ -1,0 +1,309 @@
+{% extends "blog/basic.html" %}
+
+{% block title %} {{user.username}}-Profile {% endblock %}
+
+{% block body %}
+
+{% load static %}
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+    .cnt {
+        background-image: url('/media/{{user.profile.bg_pic}}');
+        background-size: 850px 320px;
+        z-index: 0;
+        height: 320px;
+        background-repeat: no-repeat;
+        opacity: 0.6;
+        transition-property: opacity;
+        transition: ease-in-out;
+        transition-duration: 3s;
+    }
+
+    .cnt:hover {
+        opacity: 1;
+        z-index: 1;
+    }
+
+    #profile_pic {
+        width: 135px;
+        height: 135px;
+        border-radius: 50%;
+        /* border: outset; */
+        position: absolute;
+        top: 175px;
+        left: 340px;
+    }
+
+    #cameraicon2 {
+        width: 35px;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+        z-index: 0;
+        top: 15px;
+        display: none;
+    }
+
+    #bp:hover #cameraicon2 {
+        display: block;
+    }
+
+    #file2 {
+        width: 35px;
+        opacity: 0;
+        overflow: hidden;
+        top: 15px;
+        position: absolute;
+        z-index: 0;
+    }
+
+    #cameraicon1 {
+        width: 25px;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+        top: 270px;
+        left: 395px;
+        display: none;
+    }
+
+    #pp:hover #cameraicon1 {
+        display: block;
+    }
+
+    #file1 {
+        width: 30px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: 0;
+        top: 265px;
+        left: 390px;
+    }
+
+    #flex-container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #flex1 {
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+
+    #flex2 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #fullname {
+        padding-top: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    hr {
+        margin: 0.5rem !important;
+    }
+
+    p {
+        font-size: 12px;
+    }
+
+    #biocard {
+        width: 530px;
+        max-height: 160px;
+    }
+
+    .createpostcard {
+        width: 530px;
+        height: 155px;
+    }
+
+    #edittext {
+        width: 505px;
+        height: 60px;
+        text-align: center;
+    }
+
+    #biotext {
+        margin-bottom: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .material-icons {
+        color: blue;
+        font-size: 18px !important;
+        cursor: pointer;
+        display: none;
+    }
+    #aboutcard{
+        width:235px;
+    }
+    #biodata {
+        padding-top: 10px;
+        line-height: 1;
+    }
+    #fullname{
+        text-align: center;
+    }
+    #biotext {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #bio {
+        text-align: center;
+        flex: 1;
+    }
+
+    #biotext:hover .material-icons { 
+        display: block;
+    }
+    #posttext{
+        width: 500px;
+        height: 100px;
+        border:none;
+    }
+    #posttext:focus{
+        border:red;
+        background:lightgrey;
+    }
+    /* #postopt{
+    } */
+    #postopt1{
+        float:left;
+        margin-left: 5px;
+        font-size: 15px;
+    }
+    #postopt2{
+        float: right;
+        margin-right: 5px;
+    }
+</style>
+
+<div class="container col-md-8">
+        {% if user.is_authenticated %}
+    <div class="card col-md-12 mt-4 cnt" id='bp'>
+        <img src='{% static "blog/cameraicon.png" %}' id="cameraicon2">
+        <form action="/profileview" enctype="multipart/form-data" method="POST">{% csrf_token %}
+            <input type="file" accept="image/*" id="file2" name="file2" title="Choose Background"
+                onchange="form.submit(this)">
+        </form>
+    </div>
+    {% endif %}
+    <div id='pp'>
+        {% ifequal user.profile.profile_pic None %}
+        {% ifequal user.profile.gender Male %}
+        <a href="profileview"><img src="{% static 'blog/ppmale' %}" id="profile_pic"></a>
+        {% else %}
+        <a href="profileview"><img src="{% static 'blog/ppmale' %}" id="profile_pic"></a>
+        {% endifequal %}
+        {% else %}
+        <a href="/media/{{user.profile.profile_pic}}"><img src="/media/{{user.profile.profile_pic}}"
+                id="profile_pic"></a>
+        {% endifequal %}
+        {% if user.is_authenticated %}
+        <img src='{% static "blog/cameraicon.png" %}' id="cameraicon1">
+        <form action="/profileview" enctype="multipart/form-data" method="POST">{% csrf_token %}
+            <input type="file" accept="image/*" id="file1" name="file1" title="Choose DP" onchange="form.submit()">
+        </form>
+        {% endif %}
+    </div>
+
+    <div id="flex-container">
+        <div id="flex1">
+            <div class="card mt-4" id="aboutcard">
+                <h4 id="fullname">{{user.get_full_name|title}}</h4>
+                <hr>
+                <div class="mt-2 ml-2" id="biodata">
+                    <p><b>From</b> <i>{{user.profile.address}}</i></p>
+                    <p><b>Born on</b> <i>{{user.profile.dob}}</i></p>
+                    <p><b>Email:</b> <i>{{user.email}}</i></p>
+                    <p><b>Blogs:</b> <i>{{user.profile.blogcount}}</i></p>
+                    <p><b>Fields:</b> <i>{{user.profile.fields}}</i></p>
+                </div>
+                {% if not user.is_authenticated %}
+                <button type="button" class="btn btn-outline-primary" style=margin:5px>Subscribe</button>
+                {% endif %}
+            </div>
+        </div>
+        <div id="flex2">
+            <div class="card mt-4 ml-3" id="biocard">
+                <div class="card-title" style="text-align: center;margin: 5px;margin-bottom: 5px"><b>About
+                        {{user.first_name|title}}</b>
+                    <hr>
+                </div>
+                <div id="biotext">
+                    <div id="bio">{{user.profile.bio}}</div>
+                    <i class="material-icons" onclick="editbio()" title="Edit Bio">mode_edit</i>
+                </div>
+            </div>
+            <div class="card mt-4 ml-3" class="createpostcard">
+                <div class="card-title" style="text-align: center;margin: 5px;margin-bottom: 5px"><b>Create microblog</b>
+                    <hr>
+                    <form action="pst" method="POST">{% csrf_token %}
+                        <textarea name="posttext" id="posttext" resize="none" placeholder="Write microblog here....(Max 150 characters)"></textarea>
+                        <hr>
+                        <div id='postopt'>
+                            <div id='postopt1'>
+                            <a href="#">Photo/Video</a>
+                        </div>
+                        <div id='postopt2'>
+                        <input type="submit" value="Post" style=margin-top:5px />
+                        <input type="button" value="Cancel" style=margin-top:5px />
+                    </div>
+                </div>
+                    </form>
+                </div>
+            </div>
+            {% for p in psts|dictsortreversed:"dop" %}
+            <div class="card mt-4 ml-3">
+                    <div class="card-title">
+                        <div style='display:flex;flex-direction: row;'>
+                        <div style="margin: 5px;margin-bottom: 5px"><b> <a href="http://127.0.0.1:8000/profileview"><img src='/media/{{user.profile.profile_pic}}' style='width:25px;height: 25px;border-radius: 50%'> {{ user.username }}</a></b></div>
+                     <div style="text-align: right;margin: 5px;margin-bottom: 5px;font-size: 12px;color:gray">{{p.dop}}</div>
+                    </div>
+                        <hr>
+                    <div class='ml-2 mr-2' style='font-size: 15px;font-family: inherit'>{{p.pst_text}}</div>
+                         <hr>
+                         <div class='ml-2' style='font-size: 12px'>{{p.likes}}<a href="#"> Likes</a></div>
+                </div>
+            </div>
+            {% endfor %}
+        
+    </div>
+</div>
+
+<script>
+    var reserve = document.getElementById('biotext').innerHTML;
+    function editbio() {
+        const div = document.createElement('div');
+
+        div.id = 'editor';
+
+        div.innerHTML = `
+<form action="/profileview/{{user.id}}" method="POST">{% csrf_token %}
+  <input type="text" name="biotext" id="edittext" value='{{user.profile.bio}}'  />
+  <input type="submit" value="Save" style=margin-top:5px />
+  <input type="button" value="Cancel" onclick="removeRow()" style=margin-top:5px />
+  </form>`;
+        document.getElementById('biotext').innerHTML = '';
+        document.getElementById('biotext').appendChild(div);
+    }
+
+    function removeRow() {
+        document.getElementById('biotext').removeChild(document.getElementById('editor'));
+        document.getElementById('biotext').innerHTML = reserve;
+    }
+
+</script>
+{% endblock %}

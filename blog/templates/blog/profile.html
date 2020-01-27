@@ -1,0 +1,30 @@
+{% extends "blog/basic.html" %}
+
+{% block title %} {{user.username}}-Profile {% endblock %}
+
+{% block body %}
+
+{% load static %}
+
+{% if user.is_authenticated %}
+
+        <div class="container col-md-6 mt-5 card">
+            <div class="card-body">
+          <form action="profile" method="POST">{% csrf_token %}
+                <div class="card-title container">
+                   <input type='file' accept="/image" name="image"> 
+                </div>
+                <input type='submit' >Submit</form>
+                    </form>
+            </div>
+        </div>
+
+{% else %}
+
+<diV>
+        <img src='{% static "blog/img2.png" %}' style="max-width:100%;max-height:100%">
+</diV>
+
+{% endif %}
+
+{% endblock %}
