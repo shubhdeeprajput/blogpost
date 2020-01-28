@@ -44,28 +44,29 @@ def register(request):
     else:
         return render(request,'blog/register.html')
 
-def profileview(request, user_id):
+def profileview(request, user_name):
     if request.method == 'POST':
-        user = User.objects.get(pk=user_id)
-        print(user)
-        print(request.POST)
-        if 'biotext' in request.POST: 
+        user = User.objects.get(username=user_name)
+        global w
+        w=user.username
+        if 'biotext' in request.POST:
             user.profile.bio = request.POST['biotext']
             user.save()
-        else:    
-            user.profile.bg_pic=request.POST['file2']
-            user.save()       
-        return HttpResponseRedirect('profileview')
+        # else:
+        #     user.profile.bg_pic=request.POST['file2']
+        #     user.save()       
+        return HttpResponseRedirect(f'/profileview/{user_name}')
     else:
         psts=Pst.objects.all()
         return render(request,'blog/profileview.html',{'psts':psts})
 
 def pst(request):
     pst_text=request.POST['posttext']
+    print(pst_text)
     pst = Pst(pst_text=pst_text,dop=datetime.datetime.now())
     pst.save()
     psts=Pst.objects.all()
-    return HttpResponseRedirect('profileview')
+    return HttpResponseRedirect('profileview/w')
 
 def signout(request):
     auth.logout(request)
