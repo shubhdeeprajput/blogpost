@@ -250,7 +250,7 @@
             <div class="card mt-4 ml-3" class="createpostcard">
                 <div class="card-title" style="text-align: center;margin: 5px;margin-bottom: 5px"><b>Create microblog</b>
                     <hr>
-                    <form action="pst" method="POST">{% csrf_token %}
+                    <form action="/pst" method="POST">{% csrf_token %}
                         <textarea name="posttext" id="posttext" resize="none" placeholder="Write microblog here....(Max 150 characters)"></textarea>
                         <hr>
                         <div id='postopt'>
@@ -269,7 +269,7 @@
             <div class="card mt-4 ml-3">
                     <div class="card-title">
                         <div style='display:flex;flex-direction: row;'>
-                        <div style="margin: 5px;margin-bottom: 5px"><b> <a href="http://127.0.0.1:8000/profileview"><img src='/media/{{user.profile.profile_pic}}' style='width:25px;height: 25px;border-radius: 50%'> {{ user.username }}</a></b></div>
+                        <div style="margin: 5px;margin-bottom: 5px"><b> <a href="/profileview"><img src='/media/{{user.profile.profile_pic}}' style='width:25px;height: 25px;border-radius: 50%'> {{ p.blogger }}</a></b></div>
                      <div style="text-align: right;margin: 5px;margin-bottom: 5px;font-size: 12px;color:gray">{{p.dop}}</div>
                     </div>
                         <hr>
@@ -291,7 +291,7 @@
         div.id = 'editor';
 
         div.innerHTML = `
-<form action="/profileview/{{user.id}}" method="POST">{% csrf_token %}
+<form action="/profileview/{{user.username}}" method="POST">{% csrf_token %}
   <input type="text" name="biotext" id="edittext" value='{{user.profile.bio}}'  />
   <input type="submit" value="Save" style=margin-top:5px />
   <input type="button" value="Cancel" onclick="removeRow()" style=margin-top:5px />
