@@ -62,8 +62,8 @@ def profileview(request, user_name):
 
 def pst(request):
     pst_text=request.POST['posttext']
-    print(pst_text)
-    pst = Pst(pst_text=pst_text,dop=datetime.datetime.now())
+    blogger = request.user
+    pst = Pst(blogger=blogger ,pst_text=pst_text,dop=datetime.datetime.now())
     pst.save()
     psts=Pst.objects.all()
     return HttpResponseRedirect('profileview/w')

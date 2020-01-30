@@ -1,13 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
+
     profile_id = models.AutoField(primary_key=True)
     dob = models.DateField(null=True)
     gender = models.CharField(max_length=10)
@@ -22,6 +25,10 @@ class Profile(models.Model):
         return self.user.username
 
 class Pst(models.Model):
+    blogger = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        )
     pst_id=models.AutoField(primary_key=True)
     dop=models.DateTimeField()
     pst_text=models.CharField(max_length=150)
