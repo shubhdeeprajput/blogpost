@@ -26,3 +26,7 @@ And additional requirements are in **Pipfile**.
 ## Contributing
 
 Feel free to raise a issue or make a pull request to fix a bug or add a new feature. If you are new to open source you can first read about git by [clicking here](https://www.codecademy.com/learn/learn-git).
+
+## Code of Conduct
+
+Check the Code of Conduct [here](https://github.com/Rohan-cod/blogpost/blob/master/CODE_OF_CONDUCT.md)
