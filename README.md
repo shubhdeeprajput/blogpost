@@ -2,6 +2,9 @@
 
 A web app made using `django` framework. The frontend is made using `html` and `bootstrap` and `sqlite3` is used as the database. You can add articles which can be viewed by anyone. Just make an account and you are good to go. To see a live demo [click here](http://vlogpost.herokuapp.com).
 
+## Most Popular Format Among Content Marketers
+According to a recent survey, blog posts continue to be the most popular content format among content marketers, with more than eight out of every ten of them producing blog posts to help achieve their overall marketing goals (SEMrush, 2020).
+
 ## Requirements
 
 Python 3.7  
