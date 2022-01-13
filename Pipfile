@@ -8,7 +8,7 @@ verify_ssl = true
 [packages]
 django = "==2.2.13"
 gunicorn = "==19.9.0"
-pillow = "==6.2.1"
+pillow = "==9.0.0"
 
 [requires]
 python_version = "3.7"
