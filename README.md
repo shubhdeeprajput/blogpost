@@ -1,4 +1,6 @@
 # Blogpost
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshubhdeeprajput%2Fblogpost.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fshubhdeeprajput%2Fblogpost?ref=badge_shield)
+
 
 A web app made using `django` framework. The frontend is made using `html` and `bootstrap` and `sqlite3` is used as the database. You can add articles which can be viewed by anyone. Just make an account and you are good to go. To see a live demo [click here](http://vlogpost.herokuapp.com).
 
@@ -42,3 +44,7 @@ Identify your first blog post's topic. ...
 Come up with a working title. ...
 Write an intro (and make it captivating). ...
 Organize your content in an outline
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshubhdeeprajput%2Fblogpost.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fshubhdeeprajput%2Fblogpost?ref=badge_large)
